@@ -35,7 +35,7 @@ const downloadCsv = (data, prefix) => {
     })
 
     //create temp file
-    const today = date.formatDate(new Date());
+    const today = date.subjectDate(new Date());
     const jsonData = parseJSON();
 
     tmp.file({ prefix: prefix + ' ' + today, postfix: '.csv'}, (err, path, fd, cleanupCallback) => {

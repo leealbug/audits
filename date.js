@@ -12,6 +12,15 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 
+function subjectDate(date) {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+        year = year.toString().substring(2);
+
+    return [month, day, year].join('.');
+}
 const returnDate = (option) => {
     let today = new Date();
     if (option === 'tracking') {
@@ -41,5 +50,6 @@ const returnDate = (option) => {
 
 module.exports = {
     formatDate: formatDate,
-    returnDate: returnDate
+    returnDate: returnDate,
+    subjectDate: subjectDate
 }
