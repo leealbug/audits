@@ -14,7 +14,7 @@ const bulk = {
     url: ''
 }
 
-const shipmentInfo = async(type) => {
+const lateShipments = async(type) => {
     const company_id = type.company_id;
     const token = await code.getIMSToken(false, company_id);
     const endDate = date.returnDate(2);
@@ -35,4 +35,4 @@ const shipmentInfo = async(type) => {
     }
 }
 
-shipmentInfo(dropship);
+lateShipments(dropship);
