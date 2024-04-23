@@ -11,7 +11,7 @@ const dropship = {
   
 const bulk = {
     company_id: "Furhaven_bulk",
-    url: ''
+    url: 'https://api.commerce-ims.com/bulk/orders'
 }
 
 const lateShipments = async(type) => {
@@ -35,4 +35,5 @@ const lateShipments = async(type) => {
     }
 }
 
-lateShipments(dropship);
+// lateShipments(dropship);
+lateShipments(bulk);

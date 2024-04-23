@@ -43,9 +43,20 @@ const returnDate = (offset) => {
         return formatDate(today);
 }
 
+const yesterday = (date = new Date ()) => {
+    let today = new Date(date);
+    if (today.getDay() === 1) {
+        today.setDate(today.getDate() - 3);
+        return formatDate(today);
+    } else
+        today.setDate(today.getDate() - 1);
+        return formatDate(today);
+}
+
 module.exports = {
     formatDate: formatDate,
     returnDate: returnDate,
     subjectDate: subjectDate,
-    twoWeeksAgo: twoWeeksAgo
+    twoWeeksAgo: twoWeeksAgo,
+    yesterday: yesterday
 }
