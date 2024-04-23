@@ -1,4 +1,4 @@
-function formatDate(date) {
+const formatDate = (date) => {
     let d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
@@ -12,7 +12,7 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 
-function subjectDate(date) {
+const subjectDate = (date) => {
     let d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
@@ -21,6 +21,13 @@ function subjectDate(date) {
 
     return [month, day, year].join('.');
 }
+
+const twoWeeksAgo = (date) => {
+    let d = new Date(date);
+        d.setDate(d.getDate() - 14);
+    return formatDate(d);
+}
+
 const returnDate = (option) => {
     let today = new Date();
     if (option === 'tracking') {
@@ -51,5 +58,6 @@ const returnDate = (option) => {
 module.exports = {
     formatDate: formatDate,
     returnDate: returnDate,
-    subjectDate: subjectDate
+    subjectDate: subjectDate,
+    twoWeeksAgo: twoWeeksAgo
 }

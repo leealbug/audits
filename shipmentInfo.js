@@ -18,7 +18,8 @@ const shipmentInfo = async(type) => {
     const company_id = type.company_id;
     const token = await code.getIMSToken(false, company_id);
     const endDate = date.returnDate('tracking');
-    const url = "https://api.commerce-ims.com/dropship/orders?unsent_tracking=true&start_date=2024-04-01&end_date=" + endDate;
+    const startDate = date.twoWeeksAgo(endDate);
+    const url = 'https://api.commerce-ims.com/dropship/orders?unsent_tracking=true&order_valid=true&start_date=' + startDate + '&end_date=' + endDate;
     const options = {
         method: "get",
         headers: {company_id: company_id, Authorization: `Bearer ${token}`},
@@ -27,7 +28,7 @@ const shipmentInfo = async(type) => {
     const get = await axios(options);
     const orders =  JSON.parse(zlib.inflateSync(Buffer.from(get.data, 'base64')));
     csv.downloadCsv(orders, 'Late Shipment Report');
-    // console.log(orders);
+    console.log(orders);
 }
 
 shipmentInfo(dropship);
