@@ -6,7 +6,7 @@ const date = require('./utils/date.js');
 
 const dropship = {
     company_id: "Furhaven",
-    url: 'https://api.commerce-ims.com/dropship/orders?unsent_tracking=true&order_valid=true&start_date='
+    url: 'https://api.commerce-ims.com/dropship/orders?unsent_invoices=true&order_valid=true&start_date='
   }
   
 const bulk = {
@@ -14,11 +14,13 @@ const bulk = {
     url: ''
 }
 
-const lateShipments = async(type) => {
+const lateInvoices = async(type) => {
     const company_id = type.company_id;
     const token = await code.getIMSToken(false, company_id);
-    const endDate = date.returnDate(2);
+    const endDate = date.returnDate(3);
     const startDate = date.twoWeeksAgo(endDate);
+    console.log(endDate)
+    console.log(startDate)
     const fullUrl = type.url + startDate + '&end_date=' + endDate;
     const options = {
         method: "get",
@@ -27,12 +29,12 @@ const lateShipments = async(type) => {
     }
     const get = await axios(options);
     const orders =  JSON.parse(zlib.inflateSync(Buffer.from(get.data, 'base64')));
-    console.log(orders);
     if (orders.length === 0) {
-        return;
+        return console.log('no late invoices');
     } else {
-        csv.downloadCsv(orders, 'Late Shipment Report');
+        console.log(orders);
+        csv.downloadCsv(orders, 'Late Invoice Report');
     }
 }
 
-lateShipments(dropship);
+lateInvoices(dropship);

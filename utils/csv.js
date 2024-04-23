@@ -4,7 +4,7 @@ const nodeOutlook = require('nodejs-nodemailer-outlook');
 const tmp = require('tmp');
 const date = require('./date.js');
 
-const parseJSON =  (filepath = './passwords.json') => {
+const parseJSON =  (filepath = './utils/passwords.json') => {
     try {
         const data = fs.readFileSync(filepath, 'utf8');
         const jsonData = JSON.parse(data);

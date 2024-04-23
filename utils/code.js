@@ -1,46 +1,8 @@
 const axios = require("axios");
 const zlib = require("zlib");
 const fs = require('fs');
- 
-// const sampleAcumaticaRequest = async() => {
-//     let cookies = await getAcumaticaCookies();
-//     try {
-//         let url = "https://Furhaven-process.acumatica.com/entity/Commerce/20.200.001/SalesOrderBySO?$expand=SalesOrderBySODetails";
-//         let options = {
-//             method: "put",
-//             headers: {"Cookie": cookies, "Accept": 'application/json', "Content-Type": "application/json"},
-//             url: url,
-//             data: JSON.stringify({"ordernbr": {"value":"2108153"}})
-//         }
-//         let get = await axios(options);
-//         let json = get.data
-//         console.log(json);
-//     }
-//     catch(err) {
-//         console.log(err);
-//     }
-//     finally {
-//         await acumaticaLogout(cookies);
-//     }
-// }
- 
-//   const sampleIMSRequest = async() => {
-//     let company_id = "Furhaven";
-//     let token = await getIMSToken(false, company_id);
-//     let date = new Date();
-//     date.setDate(date.getDate() - 2);
-//     let url = "https://api.commerce-ims.com/dropship/orders?unsent_tracking=true&start_date=" + date.toISOString().substring(0, 10);
-//     let options = {
-//         method: "get",
-//         headers: {company_id: company_id, Authorization: `Bearer ${token}`},
-//         url: url
-//     }
-//     let get = await axios(options);
-//     let orders =  JSON.parse(zlib.inflateSync(Buffer.from(get.data, 'base64')));
-//     console.log(orders);
-// }
 
-const parseJSON =  (filepath = './passwords.json') => {
+const parseJSON =  (filepath = './utils/passwords.json') => {
     try {
         const data = fs.readFileSync(filepath, 'utf8');
         const jsonData = JSON.parse(data);
@@ -51,7 +13,6 @@ const parseJSON =  (filepath = './passwords.json') => {
 }
 
 
- 
 const getAcumaticaCookies = async(sandbox=false) => {
     const jsonData = parseJSON();
     let credentials = {
@@ -100,3 +61,41 @@ module.exports = {
     getAcumaticaCookies: getAcumaticaCookies,
     acumaticaLogout: acumaticaLogout
 }
+
+// const sampleAcumaticaRequest = async() => {
+//     let cookies = await getAcumaticaCookies();
+//     try {
+//         let url = "https://Furhaven-process.acumatica.com/entity/Commerce/20.200.001/SalesOrderBySO?$expand=SalesOrderBySODetails";
+//         let options = {
+//             method: "put",
+//             headers: {"Cookie": cookies, "Accept": 'application/json', "Content-Type": "application/json"},
+//             url: url,
+//             data: JSON.stringify({"ordernbr": {"value":"2108153"}})
+//         }
+//         let get = await axios(options);
+//         let json = get.data
+//         console.log(json);
+//     }
+//     catch(err) {
+//         console.log(err);
+//     }
+//     finally {
+//         await acumaticaLogout(cookies);
+//     }
+// }
+ 
+//   const sampleIMSRequest = async() => {
+//     let company_id = "Furhaven";
+//     let token = await getIMSToken(false, company_id);
+//     let date = new Date();
+//     date.setDate(date.getDate() - 2);
+//     let url = "https://api.commerce-ims.com/dropship/orders?unsent_tracking=true&start_date=" + date.toISOString().substring(0, 10);
+//     let options = {
+//         method: "get",
+//         headers: {company_id: company_id, Authorization: `Bearer ${token}`},
+//         url: url
+//     }
+//     let get = await axios(options);
+//     let orders =  JSON.parse(zlib.inflateSync(Buffer.from(get.data, 'base64')));
+//     console.log(orders);
+// }
