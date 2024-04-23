@@ -24,35 +24,23 @@ const subjectDate = (date) => {
 
 const twoWeeksAgo = (date) => {
     let d = new Date(date);
-        d.setDate(d.getDate() - 14);
-    return formatDate(d);
+        if (formatDate(d) == formatDate(new Date ())) {
+            d.setDate(d.getDate() - 14);
+            return formatDate(d);
+        } else {
+            d.setDate(d.getDate() - 13);
+            return formatDate(d);
+        }
 }
 
-const returnDate = (option) => {
+const returnDate = (offset) => {
     let today = new Date();
-    if (option === 'tracking') {
-        if (today.getDay() == 1){
-            today.setDate(today.getDate() - 4);
-            return formatDate(today);
-          } else if (today.getDay() == 2) {
-              today.setDate(today.getDate() - 3);
-              return formatDate(today);
-          } else 
-              today.setDate(today.getDate() - 2);
-              return formatDate(today);
-    }
-    if (option === 'invoice') {
-        if (today.getDay() == 1){
-            today.setDate(today.getDate() - 5);
-            return formatDate(today);
-          } else if (today.getDay() == 2) {
-              today.setDate(today.getDate() - 4);
-              return formatDate(today);
-          } else 
-              today.setDate(today.getDate() - 3);
-              return formatDate(today);
-    }
-
+    if (today.getDay() === 1 || today.getDay() === 2) {
+        today.setDate(today.getDate() - (offset + 2));
+        return formatDate(today);
+    } else
+        today.setDate(today.getDate() - offset);
+        return formatDate(today);
 }
 
 module.exports = {
