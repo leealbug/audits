@@ -38,7 +38,7 @@ const downloadCsv = (data, prefix) => {
     const today = date.subjectDate(new Date());
     const jsonData = parseJSON();
 
-    tmp.file({ prefix: prefix + ' ' + today, postfix: '.csv'}, (err, path, fd, cleanupCallback) => {
+    tmp.file({ prefix: today + ' ' + prefix, postfix: '.csv'}, (err, path, fd, cleanupCallback) => {
         if (err) throw err;
         
         // log path
@@ -60,7 +60,7 @@ const downloadCsv = (data, prefix) => {
             text: 'Attached is the ' + prefix + '. \nThis is an automated message.',
             attachments: [
                 {
-                    filename: prefix + ' ' + today + '.csv',
+                    filename: today +  ' ' + prefix + '.csv',
                     path: path
                 }
             ],
