@@ -33,9 +33,19 @@ const twoWeeksAgo = (date) => {
         }
 }
 
-const returnDate = (offset) => {
+const returnShipmentDate = (offset) => {
     let today = new Date();
     if (today.getDay() === 1 || today.getDay() === 2) {
+        today.setDate(today.getDate() - (offset + 2));
+        return formatDate(today);
+    } else
+        today.setDate(today.getDate() - offset);
+        return formatDate(today);
+}
+
+const returnInvoiceDate = (offset) => {
+    let today = new Date();
+    if (today.getDay() === 1 || today.getDay() === 2 || today.getDay() === 3) {
         today.setDate(today.getDate() - (offset + 2));
         return formatDate(today);
     } else
@@ -55,7 +65,8 @@ const yesterday = (date = new Date ()) => {
 
 module.exports = {
     formatDate: formatDate,
-    returnDate: returnDate,
+    returnShipmentDate: returnShipmentDate,
+    returnInvoiceDate: returnInvoiceDate,
     subjectDate: subjectDate,
     twoWeeksAgo: twoWeeksAgo,
     yesterday: yesterday
