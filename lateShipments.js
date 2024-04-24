@@ -17,7 +17,7 @@ const bulk = {
 const lateShipments = async(type) => {
     const company_id = type.company_id;
     const token = await code.getIMSToken(false, company_id);
-    const endDate = date.returnDate(2);
+    const endDate = date.returnShipmentDate(2);
     const startDate = date.twoWeeksAgo(endDate);
     const fullUrl = type.url + startDate + '&end_date=' + endDate;
     const options = {
