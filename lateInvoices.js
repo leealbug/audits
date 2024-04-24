@@ -48,8 +48,7 @@ Promise.all([lateBulk, lateDropship])
         
         } else {     
             const orders = [ ...lateBulk, ...lateDropship ];
-            const ordersArray = Object.values(orders);
-            csv.downloadCsv(ordersArray, 'Late Invoice Report');
+            csv.downloadCsv(orders, 'Late Invoice Report');
             console.log('there are late bulk and dropship invoices')
         }
     })
