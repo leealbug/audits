@@ -8,11 +8,6 @@ const dropship = {
     company_id: "Furhaven",
     url: 'https://api.commerce-ims.com/dropship/orders?null_pullsheet=true&order_valid=true&end_date='
   }
-  
-const bulk = {
-    company_id: "Furhaven_bulk",
-    url: ''
-}
 
 const missingPullsheets = async(type) => {
     const company_id = type.company_id;
