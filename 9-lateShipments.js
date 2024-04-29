@@ -44,21 +44,25 @@ const lateDropship = lateShipments(dropship);
 
 Promise.all([lateBulk, lateDropship])
     .then(([lateBulk, lateDropship]) => {
-        if (lateBulk.length === 0 && lateDropship.length === 0) {
-            return console.log('there are no late bulk or dropship shipments');
+
+        const bulkAmount = lateBulk.length;
+        const dropshipAmount = lateDropship.length;
+
+        if (bulkAmount === 0 && dropshipAmount === 0) {
+            return console.log('there are no late bulk or dropship shipments.');
         
-        } else if (lateBulk.length === 0 && lateDropship.length >= 1) {
+        } else if (bulkAmount === 0 && dropshipAmount >= 1) {
             csv.downloadCsv(lateDropship, 'Late Shipment Report')
-            return console.log('there are no late bulk shipments')
+            return console.log('there are no late bulk shipments and ' + dropshipAmount + ' late dropship shipments.')
         
-        } else if (lateBulk.length >= 1 && lateDropship.length === 0) {
+        } else if (bulkAmount >= 1 && dropshipAmount === 0) {
             csv.downloadCsv(lateBulk, 'Late Shipment Report')
-            return console.log('there are no late dropship shipments')
+            return console.log('there are ' + bulkAmount + ' late bulk shipments and no late dropship shipments.')
         
         } else {     
             const orders = [ ...lateBulk, ...lateDropship ];
             csv.downloadCsv(orders, 'Late Shipment Report');
-            console.log('there are late bulk and dropship shipments')
+            console.log('there are ' + orders.length + ' total late shipments. ' + bulkAmount + ' late bulk shipments and ' + dropshipAmount + ' late dropship shipments.')
         }
     })
     .catch(error => {
