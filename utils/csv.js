@@ -57,7 +57,7 @@ const downloadCsv = (data, prefix) => {
             to: 'lea.albaugh@petwisebrands.com',
             from: 'lea.albaugh@petwisebrands.com',
             subject: prefix + ' ' + today,
-            text: 'Attached is the ' + prefix + '. \nThis is an automated message.',
+            text: 'Attached is the ' + prefix + '. \n \nThis is an automated message.',
             attachments: [
                 {
                     filename: today +  ' ' + prefix + '.csv',
