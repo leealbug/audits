@@ -37,8 +37,8 @@ Promise.all([lateBulk, lateDropship])
     .then(([lateBulk, lateDropship]) => {
         const orders = [ ...lateBulk, ...lateDropship ];
         console.log('there are ' + orders.length + ' total late invoices. ' + lateBulk.length + ' late bulk invoices and ' + lateDropship.length + ' late dropship invoices.');
-        if (orders.length === 0) {
-            csv.downloadCsv(orders, 'Late Invoice Report');
+        if (orders.length > 0) {
+            csv.downloadCsv(orders, 'Late Invoice Report', 'The invoices of these orders have not been sent in 3+ business days.');
         } else {
             return;
         }

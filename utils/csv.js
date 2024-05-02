@@ -14,7 +14,7 @@ const parseJSON =  (filepath = './utils/passwords.json') => {
     }
 }
 
-const downloadCsv = (data, prefix) => {
+const downloadCsv = (data, prefix, description = '') => {
     // headers i want in csv
     const selectedHeaders = ['order_id', 'vendor_name', 'internal_po_number', 'order_date', 'upload_date', 'warehouse', 'acu_order_num'];
     
@@ -57,7 +57,7 @@ const downloadCsv = (data, prefix) => {
             to: 'lea.albaugh@petwisebrands.com',
             from: 'lea.albaugh@petwisebrands.com',
             subject: prefix + ' ' + today,
-            text: 'Attached is the ' + prefix + '. \n \nThis is an automated message.',
+            text: 'Attached is the ' + prefix + '. \n \n' + description + '\n \nThis is an automated message.',
             attachments: [
                 {
                     filename: today +  ' ' + prefix + '.csv',

@@ -46,8 +46,8 @@ Promise.all([lateBulk, lateDropship])
     .then(([lateBulk, lateDropship]) => {
         const orders = [ ...lateBulk, ...lateDropship ];
         console.log('there are ' + orders.length + ' total late shipments. ' + lateBulk.length + ' late bulk shipments and ' + lateDropship.length + ' late dropship shipments.');
-        if (orders.length === 0) {
-            csv.downloadCsv(orders, 'Late Shipment Report');
+        if (orders.length > 0) {
+            csv.downloadCsv(orders, 'Late Shipment Report', 'The tracking numbers of these orders have not been sent in 2+ business days.');
         } else {
             return;
         }
